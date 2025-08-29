@@ -259,7 +259,7 @@ async def build_slide_plan(
         client = OpenAI(**client_kwargs)
         resp = client.responses.create(
             model=model_name,
-            input=messages,
+            input=[{"role": "user", "content": instruction}],
             response_format={"type": "json_object"},
             temperature=0.2,
         )
