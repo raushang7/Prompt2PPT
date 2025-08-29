@@ -2,17 +2,14 @@
   import { getProfile } from "https://aipipe.org/aipipe.js";
 
   const { token, email } = getProfile();
-  if (!token) {
-    window.location = `https://aipipe.org/login?redirect=${window.location.href}`;
-  } else {
-    // Auto-fill hidden inputs in your form so app.py can use the AI Pipe token
-    document.addEventListener("DOMContentLoaded", () => {
-      const tokenInput = document.querySelector('input[name="api_key"]');
-      if (tokenInput) {
-        tokenInput.value = token;
-      }
-    });
-  }
+  // Only auto-fill if token exists, but do NOT redirect if missing
+  document.addEventListener("DOMContentLoaded", () => {
+    const tokenInput = document.querySelector('input[name="api_key"]');
+    if (tokenInput && token) {
+      tokenInput.value = token;
+    }
+    // If no token, user can manually paste their token in the input field
+  });
 </script>
 <!DOCTYPE html>
 <html lang="en">
