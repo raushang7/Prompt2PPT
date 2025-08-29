@@ -221,7 +221,6 @@ async def build_slide_plan(
         resp = client.responses.create(
             model=model_name,
             input=[{"role": "user", "content": instruction}],
-            response_format={"type": "json_object"},
             temperature=0.2,
         )
         content = _extract_openai_output_text(resp)
